@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Jogo da Memória</string>
+    <string name="pontos">Pontos = </string>
+</resources>

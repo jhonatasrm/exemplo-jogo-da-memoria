@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar"/>
+
+    <GridLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:columnCount="4"
+        android:rowCount="4"
+        android:useDefaultMargins="true"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        >
+
+        <ImageButton
+            android:id="@+id/carta1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:scaleType="fitXY"
+            android:padding="0dp"
+            android:src="@drawable/costas_carta"
+            />
+
+        <ImageButton
+            android:id="@+id/carta2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scaleType="fitXY"
+            android:padding="0dp"
+            android:src="@drawable/costas_carta"
+            />
+
+        <ImageButton
+            android:id="@+id/carta3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scaleType="fitXY"
+            android:padding="0dp"
+            android:src="@drawable/costas_carta"
+            />
+
+        <ImageButton
+            android:id="@+id/carta4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scaleType="fitXY"
+            android:padding="0dp"
+            android:src="@drawable/costas_carta"
+            />
+
+        <ImageButton
+            android:id="@+id/carta5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scaleType="fitXY"
+            android:padding="0dp"
+            android:src="@drawable/costas_carta"
+            />
+
+        <ImageButton
+            android:id="@+id/carta6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scaleType="fitXY"
+            android:padding="0dp"
+            android:src="@drawable/costas_carta"
+            />
+
+        <ImageButton
+            android:id="@+id/carta7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scaleType="fitXY"
+            android:padding="0dp"
+            android:src="@drawable/costas_carta"
+            />
+
+        <ImageButton
+            android:id="@+id/carta8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scaleType="fitXY"
+            android:padding="0dp"
+            android:src="@drawable/costas_carta"
+            />
+
+        <ImageButton
+            android:id="@+id/carta9"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scaleType="fitXY"
+            android:padding="0dp"
+            android:src="@drawable/costas_carta"
+            />
+
+        <ImageButton
+            android:id="@+id/carta10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scaleType="fitXY"
+            android:padding="0dp"
+            android:src="@drawable/costas_carta"
+            />
+
+        <ImageButton
+            android:id="@+id/carta11"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scaleType="fitXY"
+            android:padding="0dp"
+            android:src="@drawable/costas_carta"
+            />
+
+        <ImageButton
+            android:id="@+id/carta12"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scaleType="fitXY"
+            android:padding="0dp"
+            android:src="@drawable/costas_carta"
+            />
+    </GridLayout>
+    <TextView
+        android:layout_marginTop="80dp"
+        android:id="@+id/pontosCartas"
+        android:layout_width="match_parent"
+        android:gravity="center"
+        android:textSize="20sp"
+        android:layout_height="wrap_content"/>
+
+</RelativeLayout>
