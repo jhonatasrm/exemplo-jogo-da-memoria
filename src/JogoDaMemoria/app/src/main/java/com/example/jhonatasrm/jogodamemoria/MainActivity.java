@@ -107,7 +107,7 @@ public class MainActivity extends AppCompatActivity implements  View.OnClickList
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case R.id.replay:
-                botaoReplay();
+                jogarNovamente();
                 return true;
         }
         return super.onOptionsItemSelected(item);
@@ -157,16 +157,17 @@ public class MainActivity extends AppCompatActivity implements  View.OnClickList
             return false;
     }
 
-
     public void desvirarCartas(ImageButton carta1, ImageButton carta2) {
         carta1.setImageResource(R.drawable.costas_carta);
         carta2.setImageResource(R.drawable.costas_carta);
     }
 
-    public void botaoReplay(){
-        Intent refresh = new Intent(this, MainActivity.class);
-        startActivity(refresh);
-        this.finish();
+    public void jogarNovamente(){
+        Intent intent = getIntent();
+        intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+        finish();
+        overridePendingTransition(0, 0);
+        startActivity(intent);
     }
 
 }

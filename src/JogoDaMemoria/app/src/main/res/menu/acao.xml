@@ -4,6 +4,7 @@
 
     <item
         android:id="@+id/replay"
+        android:icon="@drawable/jogar_novamente"
         android:iconTint="@color/colorWhite"
-        android:title="Jogar novamente" />
+        app:showAsAction="always" />
 </menu>
