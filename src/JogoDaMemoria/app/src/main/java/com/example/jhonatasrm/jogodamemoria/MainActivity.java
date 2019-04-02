@@ -12,29 +12,18 @@ import android.widget.TextView;
 import java.util.Collections;
 import java.util.Arrays;
 
-public class MainActivity extends AppCompatActivity implements  View.OnClickListener{
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    ImageButton carta1, carta2, carta3, carta4, carta5, carta6;
-    ImageButton carta7, carta8, carta9, carta10, carta11, carta12;
-    int cartasViradas;
-    private int pontos = 0;
+    private ImageButton carta1, carta2, carta3, carta4, carta5, carta6,
+            carta7, carta8, carta9, carta10, carta11, carta12;
+    private int cartaId1, cartaId2, cartaId3, cartaId4, cartaId5, cartaId6,
+            cartaId7, cartaId8, cartaId9, cartaId10, cartaId11, cartaId12;
     private ImageButton primeiraCartaVirada;
     private ImageButton segundaCartaVirada;
-
-    private  int cartaId1 = R.drawable.carta1;
-    private  int cartaId2 = R.drawable.carta2;
-    private  int cartaId3 = R.drawable.carta3;
-    private  int cartaId4 = R.drawable.carta4;
-    private  int cartaId5 = R.drawable.carta5;
-    private  int cartaId6 = R.drawable.carta6;
-    private  int cartaId7 = R.drawable.carta1;
-    private  int cartaId8 = R.drawable.carta2;
-    private  int cartaId9 = R.drawable.carta3;
-    private  int cartaId10 = R.drawable.carta4;
-    private  int cartaId11 = R.drawable.carta5;
-    private  int cartaId12 = R.drawable.carta6;
     private ImageButton[] cartas;
-    private  int imagens[];
+    private int imagens[];
+    private int cartasViradas;
+    private int pontos = 0;
     TextView pontosCartas;
 
     @Override
@@ -45,50 +34,36 @@ public class MainActivity extends AppCompatActivity implements  View.OnClickList
         android.support.v7.widget.Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        carta1 = findViewById(R.id.carta1);
-        carta2 = findViewById(R.id.carta2);
-        carta3 = findViewById(R.id.carta3);
-        carta4 = findViewById(R.id.carta4);
-        carta5 = findViewById(R.id.carta5);
-        carta6 = findViewById(R.id.carta6);
-        carta7 = findViewById(R.id.carta7);
-        carta8 = findViewById(R.id.carta8);
-        carta9 = findViewById(R.id.carta9);
-        carta10 = findViewById(R.id.carta10);
-        carta11 = findViewById(R.id.carta11);
-        carta12 = findViewById(R.id.carta12);
-        pontosCartas = findViewById(R.id.pontosCartas);
-
-        cartasViradas = 0;
-        adicionarCartasOuvintes();
-        mostrarCartas();
-        esconderCartas();
+        configuracaoInicial();
+        adicionaCartas();
+        mostraCartas();
+        escondeCartas();
     }
 
+    //faz a verificação utilizando o evento onClick
     @Override
-    public void onClick(View v) {
-        ImageButton cartaTocada = (ImageButton) v;
+    public void onClick(View view) {
+        ImageButton cartaTocada = (ImageButton) view;
 
-        if(cartasViradas == 0) {
+        if (cartasViradas == 0) {
             primeiraCartaVirada = cartaTocada;
             viraCarta(cartaTocada);
             cartasViradas = 1;
             primeiraCartaVirada.setClickable(false);
 
-        }else {
+        } else {
             segundaCartaVirada = cartaTocada;
             cartasViradas = 0;
             viraCarta(segundaCartaVirada);
             segundaCartaVirada.setClickable(false);
 
-            if(verificaCartas(primeiraCartaVirada, segundaCartaVirada)) {
+            if (verificaCartas(primeiraCartaVirada, segundaCartaVirada)) {
                 pontos++;
-                verificarPlacar();
-            }
-            else {
+                verificaPontos();
+            } else {
                 pontos--;
-                verificarPlacar();
-                desvirarCartas(primeiraCartaVirada, segundaCartaVirada);
+                verificaPontos();
+                desviraCartas(primeiraCartaVirada, segundaCartaVirada);
                 primeiraCartaVirada.setClickable(true);
                 segundaCartaVirada.setClickable(true);
             }
@@ -96,6 +71,7 @@ public class MainActivity extends AppCompatActivity implements  View.OnClickList
 
     }
 
+    //inicia o menu na Toolbar
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -103,9 +79,10 @@ public class MainActivity extends AppCompatActivity implements  View.OnClickList
         return true;
     }
 
+    //verifica se o botão de atualizar na Toolbar foi clicado
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case R.id.replay:
                 jogarNovamente();
                 return true;
@@ -113,7 +90,8 @@ public class MainActivity extends AppCompatActivity implements  View.OnClickList
         return super.onOptionsItemSelected(item);
     }
 
-    public void adicionarCartasOuvintes() {
+    //cartas adicionadas a um array e atribuido a cada uma um evento onClickListener
+    public void adicionaCartas() {
         cartas = new ImageButton[]{
                 carta1, carta2, carta3, carta4, carta5, carta6, carta7, carta8,
                 carta9, carta10, carta11, carta12
@@ -127,42 +105,51 @@ public class MainActivity extends AppCompatActivity implements  View.OnClickList
         }
     }
 
-    public void mostrarCartas() {
+    //apresenta as cartas
+    public void mostraCartas() {
         Collections.shuffle(Arrays.asList(imagens));
         Collections.shuffle(Arrays.asList(cartas));
-        for(int i = 0 ; i < cartas.length; i++) {
+
+        for (int i = 0; i < cartas.length; i++) {
             cartas[i].setBackgroundResource(imagens[i]);
         }
     }
 
-    public void esconderCartas() {
-        for(int i = 0 ; i < cartas.length; i++){
+    //esconde as cartas
+    public void escondeCartas() {
+        for (int i = 0; i < cartas.length; i++) {
             cartas[i].setImageResource(R.drawable.costas_carta);
         }
     }
 
-    private void viraCarta(ImageButton cartaTocada){
+    //verifica a carta que foi tocada
+    private void viraCarta(ImageButton cartaTocada) {
         cartaTocada.setImageResource(0);
     }
 
-    public void  verificarPlacar() {
+    //faz uma verificação da pontuação atual, após cada jogada completa
+    public void verificaPontos() {
         pontosCartas.setText(R.string.pontos);
-        pontosCartas.append(" "+Integer.toString(pontos));
+        pontosCartas.append(" " + Integer.toString(pontos));
     }
 
+    //verifica se as cartas são iguais
     private boolean verificaCartas(ImageButton carta1, ImageButton carta2) {
-        if(carta1.getBackground().getConstantState().equals(carta2.getBackground().getConstantState()))
+        if (carta1.getBackground().getConstantState().equals(carta2.getBackground().getConstantState())) {
             return true;
-        else
+        } else {
             return false;
+        }
     }
 
-    public void desvirarCartas(ImageButton carta1, ImageButton carta2) {
+    //desvira as cartas selecionadas
+    public void desviraCartas(ImageButton carta1, ImageButton carta2) {
         carta1.setImageResource(R.drawable.costas_carta);
         carta2.setImageResource(R.drawable.costas_carta);
     }
 
-    public void jogarNovamente(){
+    //chamado para uma nova jogada
+    public void jogarNovamente() {
         Intent intent = getIntent();
         intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
         finish();
@@ -170,5 +157,37 @@ public class MainActivity extends AppCompatActivity implements  View.OnClickList
         startActivity(intent);
     }
 
+    //inicia atribuindo id a cada carta
+    public void configuracaoInicial() {
+        carta1 = findViewById(R.id.carta1);
+        carta2 = findViewById(R.id.carta2);
+        carta3 = findViewById(R.id.carta3);
+        carta4 = findViewById(R.id.carta4);
+        carta5 = findViewById(R.id.carta5);
+        carta6 = findViewById(R.id.carta6);
+        carta7 = findViewById(R.id.carta7);
+        carta8 = findViewById(R.id.carta8);
+        carta9 = findViewById(R.id.carta9);
+        carta10 = findViewById(R.id.carta10);
+        carta11 = findViewById(R.id.carta11);
+        carta12 = findViewById(R.id.carta12);
+
+        cartaId1 = R.drawable.carta1;
+        cartaId2 = R.drawable.carta2;
+        cartaId3 = R.drawable.carta3;
+        cartaId4 = R.drawable.carta4;
+        cartaId5 = R.drawable.carta5;
+        cartaId6 = R.drawable.carta6;
+        cartaId7 = R.drawable.carta1;
+        cartaId8 = R.drawable.carta2;
+        cartaId9 = R.drawable.carta3;
+        cartaId10 = R.drawable.carta4;
+        cartaId11 = R.drawable.carta5;
+        cartaId12 = R.drawable.carta6;
+
+        pontosCartas = findViewById(R.id.pontosCartas);
+
+        cartasViradas = 0;
+    }
 }
 
