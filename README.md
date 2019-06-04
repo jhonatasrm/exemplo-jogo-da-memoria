@@ -1,5 +1,5 @@
 # Exemplo Jogo da Memória
-Várias imagens aparecem na tela "viradas para baixo” e o usuário precisa encontrar pares que combinam quando virarem.
+Neste jogo da memória várias imagens aparecem na tela "viradas para baixo” e o usuário precisa encontrar pares que combinam quando virarem, cada erro perde 1 ponto e acerto soma 1 ponto.
 
 <img src="screenshot1.jpg" alt="screenshot" width="200" height="400"/> <img src="screenshot2.jpg" alt="screenshot" width="200" height="400"/>
 
